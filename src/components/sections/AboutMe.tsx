@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AboutMe: React.FC = () => {
   return (
-    <section className="aboutme brand_section" id="ABOUT">
+    <section className="aboutme brand_section_b" id="ABOUT">
       <h2 className="section-header">About Me</h2>
       <div className="about_holder">
         <div className="aboutme_text">
@@ -21,27 +21,27 @@ const AboutMe: React.FC = () => {
             can enhance my career as a professional in software development ✨. 
             */}
             I am a passionate problem solver and innovator driven by the belief that
-            technology should create lasting, human-centered impact. I’m
-            currently pursuing my Master of Science in Information Technology at
+            technology should create lasting, human-centered impact. I&apos;m
+            currently pursuing my <em>Master of Science in Information Technology at</em>
             Carnegie Mellon University Africa, where I focus on blending
             software engineering, data-driven thinking, and creative innovation
             to build solutions that empower people and communities. Over the
-            years, I’ve been part of projects that cut across education,
+            years, I&apos;ve been part of projects that cut across education,
             environmental monitoring, and digital transformation, all inspired
             by a desire to use technology not just for efficiency, but for
             purpose. My experiences have shaped how I think about systems: not
             just as lines of code, but as living ecosystems that can inform,
             connect, and uplift society. I believe in designing with empathy,
-            building with intention, and learning without limits. Whether I’m
+            building with intention, and learning without limits. Whether I&apos;m
             working on a community initiative, a research driven project, or a
-            new digital experience, I’m guided by curiosity, collaboration, and
-            a commitment to meaningful change. Outside the world of technology,
-            I’m deeply inspired by books, philosophy, and music. You’ll often
+            new digital experience, I&apos;m guided by curiosity, collaboration, and
+            a commitment to meaningful change. Outside the world of technology, 
+            <em>I&apos;m deeply inspired by books, philosophy, and music. You&apos;ll often</em>
             find me reading, spending time with family, or reflecting on human
-            nature and creativity. I’ve recently started learning guitar,
+            nature and creativity. I&apos;ve recently started learning guitar,
             exploring how rhythm and sound mirror the patterns of thought and
-            innovation. These quiet moments remind me that growth isn’t just
-            about building systems, it’s also about understanding ourselves and
+            innovation. These quiet moments remind me that growth isn&apos;t just
+            about building systems, it&apos;s also about understanding ourselves and
             the world we seek to improve ✨.
           </p>
           <div className="aboutme_buttons">

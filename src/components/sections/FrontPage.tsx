@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,7 +7,7 @@ import {
   faXTwitter,
   faLinkedinIn,
 } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faPhone, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import WordFlick from "@/components/common/WordFlick";
 
 interface MyExperienceProps {
@@ -15,21 +15,57 @@ interface MyExperienceProps {
   description: string;
 }
 
+interface ProjectCardProps {
+  title: string;
+  description: string;
+  tags: string[];
+  image: string;
+  link: string;
+}
+
 const FrontPageSection: React.FC = () => {
+  const [currentProject, setCurrentProject] = useState(0);
+
   const myOccupation = [
     "Software Engineer.",
-    "Front End Developer.",
-    "Back End Developer.",
-    "Junior Developer.",
-    "Prospective Graduate at AUCA.",
-    "Prospective Graduate at ALX.",
+    "Full Stack Developer.",
+    "Problem Solver.",
+    "Tech Innovator.",
+    "CMU Africa Graduate Student.",
+    "AI Enthusiast.",
+    "Data Engineer."
   ];
 
   const experience: MyExperienceProps[] = [
     { value: "3+", description: "Years of Experience" },
     { value: "10+", description: "Projects Completed" },
-    { value: "5+", description: "Programming Languages Learned" },
-    { value: "15+", description: "Degrees and Certificates Obtained" },
+    { value: "5+", description: "Tech Stacks" },
+    { value: "15+", description: "Certifications" },
+    // { value: "2+", description: "Degree" },
+  ];
+
+  const featuredProjects: ProjectCardProps[] = [
+    {
+      title: "P2P Training Scheduling System",
+      description: "Developed a cloud-based scheduling platform using Node.js (NestJS) and AWS serverless technologies (Lambda, DynamoDB, Cognito) for Angaza Center.",
+      tags: ["NestJS", "AWS Lambda", "DynamoDB"],
+      image: "/images/projects/project1.jpg",
+      link: "#PORTFOLIO"
+    },
+    {
+      title: "Kubaka Building Permit Platform",
+      description: "Optimized workflows for MININFRA's building permit management system, improving efficiency and data integrity across government systems.",
+      tags: ["Full Stack", "Database Integration", "Gov Tech"],
+      image: "/images/projects/project2.jpg",
+      link: "#PORTFOLIO"
+    },
+    {
+      title: "Huza HR SaaS Platform",
+      description: "Built performance management features including 1:1 meetings and 360° feedback modules, integrated with CRB data APIs.",
+      tags: ["React", "Node.js", "SaaS"],
+      image: "/images/projects/project3.jpg",
+      link: "#PORTFOLIO"
+    },
   ];
 
   const socialLinks = [
@@ -37,66 +73,119 @@ const FrontPageSection: React.FC = () => {
     { href: "https://codepen.io/Illustre13/", icon: faCodepen, label: "CodePen" },
     { href: "mailto:ndahayosibertin17@gmail.com", icon: faEnvelope, label: "Email" },
     { href: "https://linkedin.com/in/ndahayo-s-bertin", icon: faLinkedinIn, label: "LinkedIn" },
-    { href: "https://x.com/ndahayo_s", icon: faXTwitter, label: "Twitter" },
+    { href: "https://x.com/illustre_b", icon: faXTwitter, label: "Twitter" },
     { href: "tel:+250786949188", icon: faPhone, label: "Phone" },
   ];
 
+  const nextProject = () => {
+    setCurrentProject((prev) => (prev + 1) % featuredProjects.length);
+  };
+
+  const prevProject = () => {
+    setCurrentProject((prev) => (prev - 1 + featuredProjects.length) % featuredProjects.length);
+  };
+
   return (
     <section className="front-page brand_section" id="front">
-      <div className="hero-page">
-        <div className="hero">
-          <p>Hi, My Name Is</p>
-          <h2>
-            Bertin <br /> NDAHAYO SINGIZWA.
-          </h2>
-          <span>I am a </span>
-          <div className="hero_text">
-            <WordFlick words={myOccupation} speed={80} pauseDuration={1500} />
+      <div className="front-page-grid">
+        {/* Left Section - Hero Content */}
+        <div className="hero-section">
+          <div className="hero">
+            <p className="hero-greeting">Hi, My Name Is</p>
+            <h1 className="hero-name">
+              Bertin <br /> NDAHAYO SINGIZWA
+            </h1>
+            <div className="hero-title">
+              <span>I am a </span>
+              <WordFlick words={myOccupation} speed={80} pauseDuration={1500} />
+            </div>
+          </div>
+
+          <div className="hero-actions">
+            <div className="action-buttons">
+              <Link href="/files/bertin_ndahayo_cv.pdf" className="btn-primary" download>
+                <span>Download CV</span>
+                <FontAwesomeIcon icon={faArrowRight} />
+              </Link>
+              <Link href="#CONTACTS" className="btn-secondary">
+                <span>Contact Me</span>
+              </Link>
+            </div>
+
+            <div className="social-links">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.href}
+                  href={social.href}
+                  target={social.href.startsWith('http') ? '_blank' : undefined}
+                  rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  aria-label={social.label}
+                  className="social-icon"
+                >
+                  <FontAwesomeIcon icon={social.icon} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="mycv">
-          <div className="cv">
-            <div className="cv_hire_me">
-              <h6>Download My CV</h6>
-              <Link href="/files/bertin_ndahayo_cv.pdf" download>
-                <i className="fa-solid fa-download"></i>
-              </Link>
-            </div>
-            <div className="cv_hire_me">
-              <Link href="#CONTACTS">
-                <h6>Contact Me</h6>
-              </Link>
+        {/* Right Section - Stats and Projects */}
+        <div className="right-section">
+          {/* Experience Stats */}
+          <div className="experience-stats">
+            {experience.map((item, index) => (
+              <div key={index} className="stat-item">
+                <span className="stat-value">{item.value}</span>
+                <span className="stat-label">{item.description}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Featured Projects Carousel - Compact */}
+          <div className="projects-section">
+            <div className="project-card-container">
+              {featuredProjects.map((project, index) => (
+                <div
+                  key={index}
+                  className={`project-card ${index === currentProject ? 'active' : ''}`}
+                  style={{
+                    transform: `translateX(${(index - currentProject) * 100}%)`,
+                    opacity: index === currentProject ? 1 : 0,
+                  }}
+                >
+                  <div className="project-content">
+                    <h4>{project.title}</h4>
+                    <p>{project.description}</p>
+                    <div className="project-tags">
+                      {project.tags.map((tag, idx) => (
+                        <span key={idx} className="tag">{tag}</span>
+                      ))}
+                    </div>
+                    <Link href={project.link} className="read-more">
+                      Read More <FontAwesomeIcon icon={faArrowRight} />
+                    </Link>
+                  </div>
+                </div>
+              ))}  
             </div>
 
-            <div className="social_media flex items-center justify-center space-x-4">
-              <ul className="profile-content2 p-2 flex space-x-4">
-                {socialLinks.map((social) => (
-                  <li key={social.href} className="hover:text-blue-500 transition-colors">
-                    <a
-                      href={social.href}
-                      target={social.href.startsWith('http') ? '_blank' : undefined}
-                      rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      aria-label={social.label}
-                    >
-                      <FontAwesomeIcon icon={social.icon} />
-                    </a>
-                  </li>
-                ))}
-              </ul>
+            <div className="projects-header">
+              <h3></h3>
+              <div className="carousel-controls">
+                <button onClick={prevProject} className="carousel-btn" aria-label="Previous project">
+                  ‹
+                </button>
+                <span className="carousel-indicator">
+                  {currentProject + 1} / {featuredProjects.length}
+                </span>
+                <button onClick={nextProject} className="carousel-btn" aria-label="Next project">
+                  ›
+                </button>
+              </div>
             </div>
+            
           </div>
         </div>
-      </div>
-
-      {/* Experience Stats */}
-      <div className="flex flex-wrap justify-center mt-4 p-6 bg-gray-800 text-white rounded-lg w-full gap-8">
-        {experience.map((item, index) => (
-          <div key={index} className="flex flex-col items-center mx-4">
-            <span className="text-4xl font-bold text-blue-400">{item.value}</span>
-            <span className="text-lg text-gray-300">{item.description}</span>
-          </div>
-        ))}
       </div>
     </section>
   );

@@ -5,11 +5,12 @@
     justify-content: flex-end;
     color: white;
     width: 100%;
-    min-height: 100vh;
+    min-height: 80vh;
     background-image: url(/images/background_4.png);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 75px;
+    padding-top: 100px;
 }
 
 .about_holder {
@@ -23,30 +24,53 @@
     width: 70%;
     margin: 0 0 0 30px;
     padding: 0 25px;
-    font-size: 18px;
+    font-size: 17px;
     text-align: justify;
     float: left;
     min-height: 50vh;
     user-select: none;
     border-left: 1px solid #ffffff;
     border-bottom: 1px solid #ffffff;
+    line-height: 1.8;
 }
 
 .pa_text::first-letter {
-    font-size: 30px;
+    font-size: 50px;
     font-weight: bold;
     font-family: 'Finger Paint', cursive;
+    color: #03a9f4;
+    float: left;
+    margin-right: 8px;
+    margin-top: 5px;
+    line-height: 0.8;
+    text-shadow: 0 0 10px rgba(3, 169, 244, 0.5);
+}
+
+/* Highlighted text styles */
+.pa_text strong,
+.pa_text b {
+    color: #03a9f4;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(3, 169, 244, 0.3);
+}
+
+.pa_text em,
+.pa_text i {
+    color: rgba(255, 255, 255, 0.95);
+    font-style: italic;
+    background: linear-gradient(90deg, rgba(3, 169, 244, 0.1), transparent);
+    padding: 2px 6px;
+    border-left: 2px solid #03a9f4;
 }
 
 .aboutme_profile_section {
-    background-image: url(/images/my_profile.png);
-    /* background-position: center; */
-    /* background-size: contain; */
+    background-image: url(/images/my_profile_001.png);
+    background-size: contain;
     background-repeat: no-repeat;
     min-height: 50vh;
     width: 25%;
     float: right;
-    padding-left: 200px;
+    margin-top: -80px;
 }
 
 .aboutme_profile {
@@ -108,39 +132,120 @@
     margin-top: 2rem;
 }
 
+/* Quote/Callout styles */
+.about-quote {
+    background: linear-gradient(135deg, rgba(3, 169, 244, 0.1), transparent);
+    border-left: 4px solid #03a9f4;
+    padding: 20px 25px;
+    margin: 25px 0;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.95);
+    border-radius: 0 10px 10px 0;
+    box-shadow: 0 4px 15px rgba(3, 169, 244, 0.1);
+    position: relative;
+}
+
+.about-quote::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    font-size: 4rem;
+    color: rgba(3, 169, 244, 0.3);
+    font-family: Georgia, serif;
+}
+
+/* Highlight box for key achievements */
+.highlight-box {
+    display: inline-block;
+    background: rgba(3, 169, 244, 0.15);
+    padding: 4px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(3, 169, 244, 0.3);
+    color: #03a9f4;
+    font-weight: 600;
+    margin: 0 4px;
+    transition: all 0.3s ease;
+}
+
+.highlight-box:hover {
+    background: rgba(3, 169, 244, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(3, 169, 244, 0.3);
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 768px) {
+    .aboutme_text {
+        width: 90%;
+        margin: 0 auto;
+        font-size: 16px;
+    }
+
+    .aboutme_profile_section {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .about_cv {
+        flex-direction: column;
+        padding-left: 0;
+    }
+
+    .about_cv_hire_me {
+        width: 80%;
+        margin: 10px auto;
+    }
+}
+
 @media only screen and (max-width: 390px) {
     .aboutme {
-        background-position: 100px;
+        background-position: center;
+        padding-top: 60px;
     }
+
     .aboutme_text {
         width: 100%;
         margin: 0;
-        padding: 0 5px;
+        padding: 0 10px;
         font-size: 15px;
-        min-height: 25rem;
+        min-height: auto;
     }
+
     .pa_text::first-letter {
-        font-size: 20px;
+        font-size: 30px;
     } 
+
     .aboutme_profile_section {
         min-height: 20rem;
         width: 100%; 
         padding-left: 0;
+        margin-top: 10px;
     }
     
     .about_cv {
         padding-left: 0;
         justify-content: space-between;
         flex-direction: column;
+        gap: 0.5rem;
     }
+
     .about_cv_hire_me {
         width: 100%;
         min-height: 2rem;
         justify-content: center;
         align-items: center;
         border-left-width: 5px;
+        margin: 5px 0;
     }
+
     .about_cv_hire_me h6 {
         font-size: 15px;
+    }
+
+    .dots_animation {
+        gap: 0.5rem;
+        margin-top: 1rem;
     }
 }

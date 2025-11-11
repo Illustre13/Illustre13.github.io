@@ -7,14 +7,20 @@ import { faLinkedinIn, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 
 const Navbar: React.FC = () => {
   const [isImageDropdownOpen, setIsImageDropdownOpen] = React.useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   
   const toggleImageDropdown = () => {
     setIsImageDropdownOpen(!isImageDropdownOpen);
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "#ABOUT", label: "About" },
+    { href: "#EXPERIENCE", label: "Experience" },
     { href: "#SKILLS", label: "Skills" },
     { href: "#PORTFOLIO", label: "My Work" },
     { href: "#BLOG", label: "Blog" },
@@ -25,7 +31,7 @@ const Navbar: React.FC = () => {
     { href: "mailto:ndahayosibertin17@gmail.com", icon: faEnvelope, label: "Email" },
     { href: "tel:+250786949188", icon: faPhone, label: "Phone" },
     { href: "https://linkedin.com/in/ndahayo-s-bertin", icon: faLinkedinIn, label: "LinkedIn" },
-    { href: "https://x.com/ndahayo_s", icon: faXTwitter, label: "Twitter" },
+    { href: "https://x.com/illustre_b", icon: faXTwitter, label: "Twitter" },
   ];
 
   return (
@@ -35,16 +41,23 @@ const Navbar: React.FC = () => {
     >
       {/* Logo Animation */}
       <div className="logo_animation flex items-center justify-center relative h-24 w-64">
-        <h2 className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-transparent stroke-[2px] stroke-[#03a9f4]">
+        {/* <h2 className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-transparent stroke-[2px] stroke-[#03a9f4]">
           BERTIN
         </h2>
         <h2 className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[#03a9f4] animate-logoAnimation">
           BERTIN
-        </h2>
+        </h2> */}
+        <Image
+          src="/images/logos/ITH_002.png"
+          alt="Logo"
+          width={160}
+          height={60}
+        //   className="object-contain"
+        />
       </div>
 
-      {/* Navigation Bar */}
-      <div className="nav-bar flex items-center">
+      {/* Desktop Navigation */}
+      <div className="nav-bar desktop-nav flex items-center">
         <ul className="menu flex space-x-6">
           {navLinks.map((link) => (
             <li key={link.href}>
@@ -55,7 +68,6 @@ const Navbar: React.FC = () => {
           ))}
         </ul>
 
-        {/* Profile Image Dropdown */}
         <div className="relative right-0 mt-2 mx-4">
           <Image
             src="/images/me3.jpg"
@@ -67,7 +79,6 @@ const Navbar: React.FC = () => {
           />
         </div>
 
-        {/* Dropdown Content */}
         {isImageDropdownOpen && (
           <div
             id="myprofile"
@@ -97,9 +108,32 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Menu Icon */}
-      <div id="menu_scrolling" className="block lg:hidden">
-        {/* Mobile menu toggle will go here */}
-      </div>
+      <button 
+        id="menu_scrolling" 
+        className="mobile-menu-btn"
+        onClick={toggleMobileMenu}
+        aria-label="Toggle menu"
+      >
+        <span className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`}></span>
+      </button>
+
+      {/* Mobile Navigation */}
+      {isMobileMenuOpen && (
+        <div className="mobile-nav">
+          <ul className="mobile-menu">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link 
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </header>
   );
 };
