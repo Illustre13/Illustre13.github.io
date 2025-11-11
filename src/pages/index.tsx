@@ -6,6 +6,8 @@ import React from "react";
 import Skills from "@/components/sections/Skills";
 import Portfolio from "@/components/sections/Portfolio";
 import Blog from "@/components/sections/Blog";
+import Contact from "@/components/sections/Contact";
+import Footer from "@/components/layout/Footer";
 
 const HomePage: React.FC = () => {
   return (
@@ -17,6 +19,8 @@ const HomePage: React.FC = () => {
       <Skills />
       <Portfolio />
       <Blog />
+      <Contact />
+      <Footer />
     </div>
   );
 };
