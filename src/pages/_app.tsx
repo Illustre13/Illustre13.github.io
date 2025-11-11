@@ -4,6 +4,7 @@ import "../styles/logo_animation.css";
 import "../styles/about.css";
 import "../styles/anim.css";
 import "../styles/timeline.css";
+import '../styles/skills.css';
 
 import type { AppProps } from "next/app";
 

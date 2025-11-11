@@ -3,6 +3,7 @@ import FrontPageSection from "@/components/sections/FrontPage";
 import Navbar from "@/components/layout/Navbar";
 import Timeline from "@/components/sections/Timeline";
 import React from "react";
+import Skills from "@/components/sections/Skills";
 
 const HomePage: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ const HomePage: React.FC = () => {
       <FrontPageSection />
       <AboutMe />
       <Timeline />
+      <Skills />
     </div>
   );
 };
