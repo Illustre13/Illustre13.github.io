@@ -5,6 +5,7 @@ import Timeline from "@/components/sections/Timeline";
 import React from "react";
 import Skills from "@/components/sections/Skills";
 import Portfolio from "@/components/sections/Portfolio";
+import Blog from "@/components/sections/Blog";
 
 const HomePage: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage: React.FC = () => {
       <Timeline />
       <Skills />
       <Portfolio />
+      <Blog />
     </div>
   );
 };

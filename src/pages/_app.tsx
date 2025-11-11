@@ -6,6 +6,7 @@ import "../styles/anim.css";
 import "../styles/timeline.css";
 import '../styles/skills.css';
 import '../styles/portfolio.css';
+import '../styles/blog.css';
 
 import type { AppProps } from "next/app";
 

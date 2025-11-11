@@ -82,14 +82,17 @@ const Navbar: React.FC = () => {
         {isImageDropdownOpen && (
           <div
             id="myprofile"
-            className="absolute right-4 ml-2 mt-36 bg-white text-black rounded-md shadow-lg z-10 w-36"
+            className="absolute right-4 ml-2 mt-36 bg-white text-black rounded-md shadow-lg z-10 w-40"
           >
-            <ul className="profile-content1 p-2">
-              <li className="hover:text-blue-500 cursor-pointer">
+            <ul className="profile-content1 p-2 border-b border-gray-200">
+              <li className="hover:text-blue-500 cursor-pointer py-1">
                 <Link href="/gallery">Photo Gallery</Link>
               </li>
+              <li className="hover:text-blue-500 cursor-pointer py-1">
+                <Link href="/admin/login">Admin Login</Link>
+              </li>
             </ul>
-            <ul className="profile-content2 p-2 flex space-x-4">
+            <ul className="profile-content2 p-2 flex space-x-4 justify-center">
               {socialLinks.map((social) => (
                 <li key={social.href} className="hover:text-blue-500">
                   <Link 
