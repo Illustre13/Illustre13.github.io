@@ -1,0 +1,146 @@
+.dots_animation {
+  position: absolute;
+  z-index: 1;
+  margin-top: 30em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  animation: floatingDots 5s ease-in-out 2s infinite alternate;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.dots_animation:hover {
+  opacity: 1;
+}
+
+.section1 {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.section1 .diamond {
+  color: #03a9f4;
+  font-size: 1.5rem;
+  text-shadow: 
+    0 0 10px rgba(3, 169, 244, 0.5),
+    0 0 20px rgba(3, 169, 244, 0.3),
+    0 0 30px rgba(3, 169, 244, 0.2);
+  animation: twinkle 2s ease-in-out infinite;
+  animation-delay: calc(var(--delay) * 0.2s);
+}
+
+.section1:nth-child(1) .diamond { --delay: 0; }
+.section1:nth-child(2) .diamond { --delay: 1; }
+.section1:nth-child(3) .diamond { --delay: 2; }
+.section1:nth-child(4) .diamond { --delay: 3; }
+
+/* Floating animation for the entire dots container */
+@keyframes floatingDots {
+  0% {
+    left: 0px;
+    top: 320px;
+    transform: translateY(0);
+  }
+  50% {
+    left: 0px;
+    top: -250px;
+    transform: translateY(-10px);
+  }
+  100% {
+    left: 0px;
+    top: 320px;
+    transform: translateY(0);
+  }
+}
+
+/* Shimmer effect for diamond rows */
+@keyframes shimmer {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/* Twinkle effect for individual diamonds */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.4;
+    transform: rotate(0deg) scale(0.9);
+  }
+  25% {
+    opacity: 1;
+    transform: rotate(45deg) scale(1.1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: rotate(90deg) scale(1);
+  }
+  75% {
+    opacity: 0.8;
+    transform: rotate(135deg) scale(1.05);
+  }
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 768px) {
+  .dots_animation {
+    margin-top: 15em;
+    gap: 0.3rem;
+  }
+  
+  .section1 .diamond {
+    font-size: 1.2rem;
+  }
+  
+  @keyframes floatingDots {
+    0% {
+      left: 0px;
+      top: 200px;
+    }
+    50% {
+      left: 0px;
+      top: -150px;
+    }
+    100% {
+      left: 0px;
+      top: 200px;
+    }
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .dots_animation {
+    margin-top: 10em;
+    gap: 0.25rem;
+  }
+  
+  .section1 {
+    gap: 0.5rem;
+  }
+  
+  .section1 .diamond {
+    font-size: 1rem;
+  }
+  
+  @keyframes floatingDots {
+    0% {
+      left: 0px;
+      top: 100px;
+    }
+    50% {
+      left: 0px;
+      top: -100px;
+    }
+    100% {
+      left: 0px;
+      top: 100px;
+    }
+  }
+}
