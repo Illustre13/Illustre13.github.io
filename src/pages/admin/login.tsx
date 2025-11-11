@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import '../../styles/admin.css';
+
 
 const AdminLogin: React.FC = () => {
   const router = useRouter();
