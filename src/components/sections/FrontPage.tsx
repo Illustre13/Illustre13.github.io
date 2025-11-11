@@ -151,6 +151,9 @@ const FrontPageSection: React.FC = () => {
                   style={{
                     transform: `translateX(${(index - currentProject) * 100}%)`,
                     opacity: index === currentProject ? 1 : 0,
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
                   }}
                 >
                   <div className="project-content">
@@ -168,9 +171,8 @@ const FrontPageSection: React.FC = () => {
                 </div>
               ))}  
             </div>
-
             <div className="projects-header">
-              <h3></h3>
+              {/* <h3>Featured Work</h3> */}
               <div className="carousel-controls">
                 <button onClick={prevProject} className="carousel-btn" aria-label="Previous project">
                   ‹
@@ -183,7 +185,6 @@ const FrontPageSection: React.FC = () => {
                 </button>
               </div>
             </div>
-            
           </div>
         </div>
       </div>

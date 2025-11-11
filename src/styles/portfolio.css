@@ -1,0 +1,453 @@
+.portfolio {
+  min-height: 100vh;
+  padding: 100px 20px 80px;
+  background: #000;
+  position: relative;
+}
+
+.portfolio-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.portfolio-header {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  letter-spacing: -1px;
+}
+
+.portfolio-header::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: #03a9f4;
+  margin: 1.5rem auto;
+}
+
+.portfolio-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 3.5rem;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+}
+
+/* Category Tabs */
+.category-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 3.5rem;
+  padding: 0 10px;
+}
+
+.category-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: 1px solid rgba(3, 169, 244, 0.3);
+  border-radius: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.category-tab:hover {
+  background: rgba(3, 169, 244, 0.1);
+  color: #03a9f4;
+  border-color: #03a9f4;
+}
+
+.category-tab.active {
+  background: #03a9f4;
+  color: #fff;
+  border-color: #03a9f4;
+  font-weight: 500;
+}
+
+.tab-icon {
+  font-size: 0.95rem;
+}
+
+/* Projects Grid with Animation */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2rem;
+  padding: 0 10px;
+  width: 100%;
+  position: relative;
+}
+
+/* Card Animation */
+.project-card {
+  background: linear-gradient(135deg, rgba(3, 169, 244, 0.05), rgba(0, 0, 0, 0.3));
+  border: 1px solid rgba(3, 169, 244, 0.3);
+  border-radius: 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+  backdrop-filter: blur(10px);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stagger animation for cards */
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.2s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; }
+.project-card:nth-child(4) { animation-delay: 0.4s; }
+.project-card:nth-child(5) { animation-delay: 0.5s; }
+.project-card:nth-child(6) { animation-delay: 0.6s; }
+.project-card:nth-child(7) { animation-delay: 0.7s; }
+.project-card:nth-child(8) { animation-delay: 0.8s; }
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: #03a9f4;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover {
+  transform: translateX(8px);
+  background: linear-gradient(135deg, rgba(3, 169, 244, 0.1), rgba(0, 0, 0, 0.4));
+  border-color: #03a9f4;
+  box-shadow: 0 15px 40px rgba(3, 169, 244, 0.2);
+}
+
+.project-card:hover::before {
+  transform: scaleY(1);
+}
+
+.project-content {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  position: relative;
+}
+
+.project-category-badge {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: rgba(3, 169, 244, 0.2);
+  color: #03a9f4;
+  border: 1px solid rgba(3, 169, 244, 0.3);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  width: fit-content;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover .project-category-badge {
+  transform: translateX(5px);
+  background: #03a9f4;
+  color: #000;
+}
+
+.project-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+  letter-spacing: -0.5px;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover .project-title {
+  color: #03a9f4;
+  transform: translateX(5px);
+}
+
+.project-description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 1.5rem 0;
+  flex-grow: 1;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover .project-description {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.project-links {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(3, 169, 244, 0.2);
+  transition: all 0.3s ease;
+}
+
+.project-card:hover .project-links {
+  border-top-color: rgba(3, 169, 244, 0.4);
+  transform: translateX(5px);
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.3rem;
+  background: transparent;
+  color: #03a9f4;
+  border: 1px solid rgba(3, 169, 244, 0.3);
+  border-radius: 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #03a9f4;
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.project-link:hover {
+  color: #000;
+  border-color: #03a9f4;
+}
+
+.project-link:hover::before {
+  left: 0;
+}
+
+.project-link svg {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.project-link:hover svg {
+  transform: scale(1.1);
+}
+
+.no-projects {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.1rem;
+  grid-column: 1 / -1;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 1200px) {
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.75rem;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .portfolio-header {
+    font-size: 2.5rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-content {
+    padding: 1.75rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .portfolio {
+    padding: 80px 15px 60px;
+  }
+
+  .portfolio-header {
+    font-size: 2rem;
+  }
+
+  .portfolio-subtitle {
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .category-tabs {
+    margin-bottom: 2.5rem;
+    gap: 0.4rem;
+  }
+
+  .category-tab {
+    padding: 0.65rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  .tab-icon {
+    font-size: 0.85rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0;
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .project-card::before {
+    width: 100%;
+    height: 3px;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  .project-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .project-content {
+    padding: 1.5rem;
+  }
+
+  .project-title {
+    font-size: 1.2rem;
+  }
+
+  .project-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .project-link {
+    padding: 0.55rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .portfolio {
+    padding: 70px 10px 50px;
+  }
+
+  .portfolio-header {
+    font-size: 1.75rem;
+  }
+
+  .portfolio-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  .category-tabs {
+    gap: 0.35rem;
+    margin-bottom: 2rem;
+  }
+
+  .category-tab {
+    padding: 0.55rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .tab-icon {
+    font-size: 0.8rem;
+  }
+
+  .projects-grid {
+    gap: 1.25rem;
+  }
+
+  .project-content {
+    padding: 1.25rem;
+  }
+
+  .project-category-badge {
+    padding: 0.35rem 0.85rem;
+    font-size: 0.65rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .project-description {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+  }
+
+  .project-links {
+    gap: 0.5rem;
+    padding-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .project-link {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .project-link svg {
+    font-size: 0.9rem;
+  }
+}

@@ -209,8 +209,9 @@
 
 .projects-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 .projects-header h3 {
@@ -254,7 +255,7 @@
 /* Project Card - Smaller */
 .project-card-container {
   position: relative;
-  height: 250px;
+  height: 280px;
   overflow: hidden;
   border-radius: 16px;
 }
@@ -269,6 +270,10 @@
   overflow: hidden;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(10px);
+}
+
+.project-card.active {
+  z-index: 1;
 }
 
 .project-image {
@@ -293,7 +298,6 @@
   font-size: 0.9rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.8);
-  flex-grow: 0;
 }
 
 .project-tags {
@@ -320,6 +324,7 @@
   text-decoration: none;
   transition: all 0.3s ease;
   margin-top: auto;
+  width: fit-content;
 }
 
 .read-more:hover {
