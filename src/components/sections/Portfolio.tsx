@@ -98,7 +98,7 @@ const Portfolio: React.FC = () => {
     },
   ];
 
-  const categories: { name: Category; icon: any }[] = [
+  const categories: { name: Category; icon: typeof faCode }[] = [
     { name: "All", icon: faCode },
     { name: "Research", icon: faFlask },
     { name: "Full Stack", icon: faCode },

@@ -14,7 +14,7 @@ const HomePage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>bertin</title>
+        <title>Illustre</title>
         <meta name="description" content="Bertin's Portfolio - Full Stack Developer, Data Engineer & ML Specialist" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>

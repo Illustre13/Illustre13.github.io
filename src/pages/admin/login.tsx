@@ -29,7 +29,7 @@ const AdminLogin: React.FC = () => {
       } else {
         router.push('/admin/dashboard');
       }
-    } catch (error) {
+    } catch {
       setError('An error occurred. Please try again.');
     } finally {
       setLoading(false);

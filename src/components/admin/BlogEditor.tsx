@@ -4,18 +4,20 @@ import 'react-quill/dist/quill.snow.css';
 
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
+interface BlogFormData {
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  coverImage: string;
+  category: string;
+  tags: string[];
+  published: boolean;
+}
+
 interface BlogEditorProps {
-  initialData?: {
-    title: string;
-    slug: string;
-    excerpt: string;
-    content: string;
-    coverImage: string;
-    category: string;
-    tags: string[];
-    published: boolean;
-  };
-  onSubmit: (data: any) => void;
+  initialData?: BlogFormData;
+  onSubmit: (data: BlogFormData) => void;
 }
 
 const BlogEditor: React.FC<BlogEditorProps> = ({ initialData, onSubmit }) => {

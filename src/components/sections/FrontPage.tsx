@@ -147,7 +147,7 @@ const FrontPageSection: React.FC = () => {
               {featuredProjects.map((project, index) => (
                 <div
                   key={index}
-                  className={`project-card ${index === currentProject ? 'active' : ''}`}
+                  className={`project-card_fp ${index === currentProject ? 'active' : ''}`}
                   style={{
                     transform: `translateX(${(index - currentProject) * 100}%)`,
                     opacity: index === currentProject ? 1 : 0,
@@ -156,7 +156,7 @@ const FrontPageSection: React.FC = () => {
                     height: '100%',
                   }}
                 >
-                  <div className="project-content">
+                  <div className="project-content_fp">
                     <h4>{project.title}</h4>
                     <p>{project.description}</p>
                     <div className="project-tags">

@@ -28,7 +28,7 @@ export default async function handler(
       }
 
       return res.status(200).json(post);
-    } catch (error) {
+    } catch {
       return res.status(500).json({ error: 'Error fetching post' });
     }
   }
@@ -58,7 +58,7 @@ export default async function handler(
       });
 
       return res.status(200).json(post);
-    } catch (error) {
+    } catch {
       return res.status(500).json({ error: 'Error updating post' });
     }
   }
@@ -76,7 +76,7 @@ export default async function handler(
       });
 
       return res.status(204).end();
-    } catch (error) {
+    } catch {
       return res.status(500).json({ error: 'Error deleting post' });
     }
   }
