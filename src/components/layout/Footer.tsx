@@ -12,7 +12,8 @@ import {
   faEnvelope, 
   faPhone, 
   faLocationDot,
-  faArrowUp 
+  faArrowUp,
+  faCalendarDays
 } from '@fortawesome/free-solid-svg-icons';
 
 const Footer: React.FC = () => {
@@ -113,17 +114,42 @@ const Footer: React.FC = () => {
             <h3 className="footer-title">Get In Touch</h3>
             <ul className="footer-contact">
               <li>
-                <FontAwesomeIcon icon={faLocationDot} className="contact-icon" />
+                <div className="contact-icon">
+                  <FontAwesomeIcon icon={faLocationDot} />
+                </div>
                 <span>Kigali, Rwanda 🇷🇼</span>
               </li>
               <li>
-                <FontAwesomeIcon icon={faPhone} className="contact-icon" />
+                <div className="contact-icon">
+                  <FontAwesomeIcon icon={faPhone} />
+                </div>
                 <a href="tel:+250786949188">+250 786 949 188</a>
               </li>
               <li>
-                <FontAwesomeIcon icon={faEnvelope} className="contact-icon" />
+                <div className="contact-icon">
+                  <FontAwesomeIcon icon={faEnvelope} />
+                </div>
                 <a href="mailto:ndahayosibertin17@gmail.com">
                   ndahayosibertin17@gmail.com
+                </a>
+              </li>
+              <li>
+                <div className="contact-icon">
+                  <FontAwesomeIcon icon={faCalendarDays} />
+                </div>
+                <a 
+                  href="" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (typeof window !== 'undefined' && (window as any).Calendly) {
+                      (window as any).Calendly.initPopupWidget({
+                        url: 'https://calendly.com/ndahayosibertin17/1-1-meeting-with-bertin'
+                      });
+                    }
+                  }}
+                  style={{ cursor: 'pointer' }}
+                >
+                  Schedule a Meeting
                 </a>
               </li>
             </ul>
