@@ -62,7 +62,7 @@ Edit `.env.local` with your actual values:
 ```env
 DATABASE_URL="postgresql://postgres:yourpassword@localhost:5432/portfolio_db"
 NEXTAUTH_SECRET="your-generated-secret-key"
-NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_URL="http://localhost:1998"
 ```
 
 **Generate a secure NEXTAUTH_SECRET:**
@@ -180,7 +180,7 @@ npm run dev
 yarn dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000)
+Visit [http://localhost:1998](http://localhost:1998)
 
 ## 📁 Project Structure
 

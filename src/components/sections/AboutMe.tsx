@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AboutMe: React.FC = () => {
   return (
-    <section className="aboutme brand_section_b" id="ABOUT">
+    <section className="aboutme brand_section" id="ABOUT">
       <h2 className="section-header">About Me</h2>
       <div className="about_holder">
         <div className="aboutme_text">
