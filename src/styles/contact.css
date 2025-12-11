@@ -314,8 +314,8 @@
 
 .status-message.success {
   background: rgba(0, 255, 0, 0.1);
-  border: 1px solid rgba(0, 255, 0, 0.3);
-  color: #00ff00;
+  border: 1px solid rgba(15, 118, 227, 0.3);
+  color: #03a9f4;
 }
 
 .status-message.error {

@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import nodemailer from 'nodemailer';
 
 export default async function handler(
   req: NextApiRequest,
@@ -22,23 +23,49 @@ export default async function handler(
       return res.status(400).json({ error: 'Invalid email address' });
     }
 
-    // TODO: Add your email service here (SendGrid, Nodemailer, etc.)
-    // For now, just log the message
-    console.log('Contact Form Submission:', {
-      firstName,
-      lastName,
-      email,
-      message,
-      timestamp: new Date().toISOString(),
+    // Configure nodemailer transporter
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_APP_PASSWORD,
+      },
     });
 
-    // Simulate sending email
-    // await sendEmail({
-    //   to: 'ndahayosibertin17@gmail.com',
-    //   from: email,
-    //   subject: `Contact Form: ${firstName} ${lastName}`,
-    //   text: message,
-    // });
+    // Send email
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: 'ndahayosibertin17@gmail.com',
+      replyTo: email,
+      subject: `Portfolio Contact: ${firstName} ${lastName}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #03a9f4; border-bottom: 2px solid #03a9f4; padding-bottom: 10px;">
+            New Contact Form Submission
+          </h2>
+          
+          <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <p style="margin: 10px 0;">
+              <strong style="color: #333;">From:</strong> 
+              <span style="color: #666;">${firstName} ${lastName}</span>
+            </p>
+            <p style="margin: 10px 0;">
+              <strong style="color: #333;">Email:</strong> 
+              <a href="mailto:${email}" style="color: #03a9f4; text-decoration: none;">${email}</a>
+            </p>
+          </div>
+          
+          <div style="background: white; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+            <h3 style="color: #333; margin-top: 0;">Message:</h3>
+            <p style="color: #666; line-height: 1.6; white-space: pre-wrap;">${message}</p>
+          </div>
+          
+          <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; color: #999; font-size: 12px;">
+            <p>Sent from your portfolio contact form</p>
+          </div>
+        </div>
+      `,
+    });
 
     return res.status(200).json({ 
       success: true, 
