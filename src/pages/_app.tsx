@@ -10,6 +10,7 @@ import '../styles/blog.css';
 import '../styles/contact.css';
 import '../styles/footer.css';
 import '../styles/admin.css';
+import '../styles/dashboard.css';
 
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";

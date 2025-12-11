@@ -3,26 +3,31 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql" // or "mysql", "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
+// User Management
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  password  String
-  role      Role     @default(USER)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  posts     Post[]
+  id          String   @id @default(cuid())
+  email       String   @unique
+  name        String
+  password    String
+  role        Role     @default(ADMIN)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  posts       Post[]
+  projects    Project[]
+  experiences Experience[]
 }
 
 enum Role {
-  USER
   ADMIN
+  SUPER_ADMIN
 }
 
+// Blog Posts
 model Post {
   id          String   @id @default(cuid())
   title       String
@@ -30,19 +35,164 @@ model Post {
   excerpt     String
   content     String   @db.Text
   coverImage  String?
-  published   Boolean  @default(false)
-  category    String
   tags        String[]
-  author      User     @relation(fields: [authorId], references: [id])
-  authorId    String
+  category    String
+  published   Boolean  @default(false)
+  views       Int      @default(0)
+  likes       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  
+  @@index([slug])
+  @@index([published])
+  @@index([category])
 }
 
+// Projects/Portfolio
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String
+  longDesc    String?  @db.Text
+  image       String
+  images      String[] // Multiple project images
+  tags        String[]
+  category    String   // web, mobile, desktop, ai, etc.
+  githubUrl   String?
+  liveUrl     String?
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  status      String   @default("completed") // completed, in-progress, planned
+  startDate   DateTime?
+  endDate     DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  
+  @@index([slug])
+  @@index([featured])
+  @@index([category])
+}
+
+// Skills
+model Skill {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  category    String   // frontend, backend, database, devops, tools, etc.
+  level       Int      // 1-100 proficiency
+  icon        String?  // FontAwesome icon name or image URL
+  color       String?  // Hex color for skill badge
+  order       Int      @default(0)
+  visible     Boolean  @default(true)
+  yearsOfExp  Int?     // Years of experience
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@index([category])
+  @@index([visible])
+}
+
+// Timeline/Experience
+model Experience {
+  id          String   @id @default(cuid())
+  title       String
+  company     String
+  location    String?
+  startDate   DateTime
+  endDate     DateTime?
+  current     Boolean  @default(false)
+  description String   @db.Text
+  skills      String[]
+  order       Int      @default(0)
+  type        String   // work, education, certification, award
+  icon        String?
+  link        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  authorId    String?
+  author      User?    @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  
+  @@index([type])
+  @@index([current])
+}
+
+// Front Page Hero Stats
+model HeroStat {
+  id          String   @id @default(cuid())
+  value       String   // e.g., "50+", "100%", "5 years"
+  label       String   // e.g., "Projects", "Satisfaction", "Experience"
+  icon        String?  // FontAwesome icon name
+  order       Int      @default(0)
+  visible     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@index([visible])
+}
+
+// Site Settings
 model Settings {
   id          String   @id @default(cuid())
   key         String   @unique
   value       String   @db.Text
+  type        String   @default("text") // text, number, boolean, json, url
+  category    String   @default("general") // general, seo, social, contact
   description String?
   updatedAt   DateTime @updatedAt
+  
+  @@index([key])
+  @@index([category])
+}
+
+// Contact Messages
+model ContactMessage {
+  id        String   @id @default(cuid())
+  firstName String
+  lastName  String
+  email     String
+  message   String   @db.Text
+  read      Boolean  @default(false)
+  replied   Boolean  @default(false)
+  starred   Boolean  @default(false)
+  notes     String?  @db.Text
+  createdAt DateTime @default(now())
+  
+  @@index([read])
+  @@index([createdAt])
+  @@index([starred])
+}
+
+// Analytics - Page Views
+model PageView {
+  id        String   @id @default(cuid())
+  page      String
+  views     Int      @default(1)
+  date      DateTime @default(now()) @db.Date
+  
+  @@unique([page, date])
+  @@index([date])
+  @@index([page])
+}
+
+// Testimonials (optional, for future)
+model Testimonial {
+  id          String   @id @default(cuid())
+  name        String
+  role        String
+  company     String?
+  avatar      String?
+  content     String   @db.Text
+  rating      Int      @default(5)
+  featured    Boolean  @default(false)
+  approved    Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@index([approved])
+  @@index([featured])
 }

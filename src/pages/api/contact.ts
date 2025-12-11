@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
+import prisma from '@/lib/prisma';
 
 export default async function handler(
   req: NextApiRequest,
@@ -22,6 +23,16 @@ export default async function handler(
     if (!emailRegex.test(email)) {
       return res.status(400).json({ error: 'Invalid email address' });
     }
+
+    // Save message to database
+    await prisma.contactMessage.create({
+      data: {
+        firstName,
+        lastName,
+        email,
+        message,
+      },
+    });
 
     // Configure nodemailer transporter
     const transporter = nodemailer.createTransport({
