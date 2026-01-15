@@ -1,5 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendar, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 interface TimelineItem {
   id: number;
@@ -122,11 +124,11 @@ const Timeline: React.FC = () => {
                 <p className="timeline-description">{item.description}</p>
                 <div className="timeline-meta">
                   <div className="timeline-date">
-                    <span className="date-icon">🗓️</span>
+                    <FontAwesomeIcon icon={faCalendar} className="date-icon" />
                     <span>{item.date}</span>
                   </div>
                   <div className="timeline-location">
-                    <span className="location-icon">📍</span>
+                    <FontAwesomeIcon icon={faLocationDot} className="location-icon" />
                     <span>{item.location}</span>
                   </div>
                 </div>

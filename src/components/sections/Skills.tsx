@@ -82,7 +82,7 @@ const Skills: React.FC = () => {
         {skillCategories.map((category, index) => (
           <div className="skill_set" key={index}>
             <h3>{category.title}</h3>
-            <i className={category.icon}></i>
+            <i className={category.icon} ></i>
             <div className="skill_element">
               {category.skills.map((skill, skillIndex) => (
                 <div className="se_001" key={skillIndex}>

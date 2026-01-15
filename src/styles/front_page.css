@@ -283,7 +283,7 @@
 
 .project-card_fp.active {
   z-index: 1;
-  padding-bottom: 4px;
+  padding-bottom: 10px;
 }
 
 .project-image {
@@ -403,6 +403,7 @@
 
   .social-links {
     justify-content: center;
+    gap: 2rem;
   }
 
   .right-section {

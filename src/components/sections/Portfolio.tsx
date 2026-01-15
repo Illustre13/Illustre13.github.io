@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 // import Image from 'next/image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faExternalLinkAlt, faCode, faFlask, faChartBar, faDatabase, faBrain, faLightbulb } from '@fortawesome/free-solid-svg-icons';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import {
+  faExternalLinkAlt,
+  faCode,
+  faFlask,
+  faChartBar,
+  faDatabase,
+  faBrain,
+  faLightbulb,
+  faFileAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 type Category =
   | "All"
@@ -22,6 +30,7 @@ interface Project {
   image: string;
   liveLink?: string;
   githubLink?: string;
+  publicationLink?: string;
 }
 
 const Portfolio: React.FC = () => {
@@ -30,12 +39,12 @@ const Portfolio: React.FC = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: "GeoSolar Vision",
+      title: "GeoSolar Vision [WIP]",
       description:
         "A GIS-based solar energy potential assessment platform for Kigali, Rwanda, using Google Earth Engine (GEE) and deep learning to identify optimal solar sites and support smart grid planning.",
       category: "Research",
       image: "/images/geosolar.png",
-      githubLink: "https://github.com/Illustre13/GeoSolar-Vision",
+      // githubLink: "https://github.com/Illustre13/GeoSolar-Vision",
     },
     {
       id: 2,
@@ -44,15 +53,16 @@ const Portfolio: React.FC = () => {
         "A serverless web platform using AWS Lambda, DynamoDB, and NestJS for real-time peer-to-peer training coordination across schools under Angaza Center.",
       category: "Full Stack",
       image: "/images/angaza.png",
-      githubLink: "https://github.com/Illustre13/Angaza-P2P",
+      githubLink: "https://github.com/Angaza-Center/angaza-p2p",
     },
     {
       id: 3,
       title: "Air Quality Monitoring System",
       description:
-        "A data-driven environmental monitoring platform for analyzing pollution levels through IoT sensors and statistical visualization for urban policy planning.",
-      category: "Data Analysis",
+        "Co-authored a research-driven platform for real-time air quality monitoring using IoT sensor data. Designed the data ingestion pipeline, implemented statistical models, and visualized pollution trends to support urban planning. Findings were published in IEEE Xplore: 'Mapping Socioeconomic Air Quality Disparities In Rwanda Using Sentinel-5P TROPOMI Data In Google Earth Engine'.",
+      category: "Research",
       image: "/images/air-quality.png",
+      publicationLink: "https://ieeexplore.ieee.org/document/11232033",
     },
     {
       id: 4,
@@ -74,27 +84,37 @@ const Portfolio: React.FC = () => {
     },
     {
       id: 6,
-      title: "AI-Powered Voice Interfaces for Financial Inclusion",
+      title: "Capacity Development Management System for Public Institutions in Rwanda",
       description:
-        "Research assistant project exploring AI-driven voice technologies for improving mobile money accessibility for visually impaired users in Rwanda.",
-      category: "Research",
-      image: "/images/ai-voice.png",
+        "Case Study: Rwanda Development Board (RDB). A final year project presented in partial fulfillment of the requirements for the Bachelor’s Degree in Information Technology, majoring in Software Engineering. Developed a system to streamline capacity development processes, improve reporting, and enhance institutional efficiency.",
+      category: "Full Stack",
+      image: "/images/capacity-development.png",
+      githubLink: "https://github.com/Illustre13/cdms_fn"
     },
     {
       id: 7,
       title: "Kubaka Building Permit Management System",
       description:
         "A digital government platform developed under MININFRA to streamline permit applications, improve transparency, and optimize data flow across agencies.",
-      category: "Data Engineering",
+      category: "Full Stack",
       image: "/images/kubaka.png",
     },
     {
       id: 8,
-      title: "INKINGI Claim Platform",
+      title: "INKINGI Claim Platform [WIP]",
       description:
         "An AI-powered disaster insurance and real-time incident reporting platform for citizens, insurers, and emergency services across Africa.",
       category: "Ideation",
       image: "/images/inkingi.png",
+    },
+    {
+      id: 9,
+      title: "RISA Keycloak SSO Solution",
+      description:
+        "As part of my Master’s practicum, worked in a team to design and implement a Keycloak-based SSO solution for RISA, enabling secure authentication, role-based access, and seamless integration with multiple applications to improve system security and user management.",
+      category: "Full Stack",
+      image: "/images/risa-keycloak.png",
+      githubLink: "https://github.com/RISA-SSO",
     },
   ];
 
@@ -117,14 +137,18 @@ const Portfolio: React.FC = () => {
     <section className="portfolio brand_section" id="PORTFOLIO">
       <h2 className="section-header">My Work</h2>
       <div className="portfolio-container">
-        <p className="portfolio-subtitle">Showcasing my work and projects worked on recently...</p>
+        <p className="portfolio-subtitle">
+          Showcasing my work and projects worked on recently...
+        </p>
 
         {/* Category Tabs */}
         <div className="category-tabs">
           {categories.map((cat) => (
             <button
               key={cat.name}
-              className={`category-tab ${activeCategory === cat.name ? "active" : ""}`}
+              className={`category-tab ${
+                activeCategory === cat.name ? "active" : ""
+              }`}
               onClick={() => setActiveCategory(cat.name)}
             >
               <FontAwesomeIcon icon={cat.icon} className="tab-icon" />
@@ -141,8 +165,10 @@ const Portfolio: React.FC = () => {
                 <div className="project-category-badge">{project.category}</div>
                 <h3 className="project-title">{project.title}</h3>
                 <p className="project-description">{project.description}</p>
-                
-                {(project.githubLink || project.liveLink) && (
+
+                {(project.githubLink ||
+                  project.liveLink ||
+                  project.publicationLink) && (
                   <div className="project-links">
                     {project.githubLink && (
                       <a
@@ -168,6 +194,18 @@ const Portfolio: React.FC = () => {
                         <span>Live Demo</span>
                       </a>
                     )}
+                    {project.publicationLink && (
+                      <a
+                        href={project.publicationLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link"
+                        aria-label="View Publication"
+                      >
+                        <FontAwesomeIcon icon={faFileAlt} />
+                        <span>Publication</span>
+                      </a>
+                    )}
                   </div>
                 )}
               </div>
@@ -177,7 +215,7 @@ const Portfolio: React.FC = () => {
 
         {filteredProjects.length === 0 && (
           <div className="no-projects">
-            <p>No projects found in this category yet.</p>
+            <p>Adding more projects soon.</p>
           </div>
         )}
       </div>

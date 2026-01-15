@@ -249,7 +249,7 @@
 }
 
 .footer-built .heart {
-  color: #ff6b6b;
+  color: #03a9f4;
   display: inline-block;
   animation: heartbeat 1.5s ease-in-out infinite;
 }

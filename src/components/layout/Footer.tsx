@@ -13,7 +13,8 @@ import {
   faPhone, 
   faLocationDot,
   faArrowUp,
-  faCalendarDays
+  faCalendarDays,
+  faHeart
 } from '@fortawesome/free-solid-svg-icons';
 
 const Footer: React.FC = () => {
@@ -163,7 +164,9 @@ const Footer: React.FC = () => {
               © {currentYear} <span className="highlight">@illustre_bertin</span>. All rights reserved.
             </p>
             <p className="footer-built">
-              Built from scratch with <span className="heart">❤️</span> using Next.js & TypeScript
+              Built from scratch with <span className="heart">
+                <FontAwesomeIcon icon={faHeart} />
+                </span> using Next.js & TypeScript
             </p>
           </div>
 

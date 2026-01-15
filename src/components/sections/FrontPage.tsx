@@ -165,7 +165,7 @@
                       opacity: index === currentProject ? 1 : 0,
                       position: 'absolute',
                       width: '100%',
-                      height: '100%',
+                      // height: '100%',
                     }}
                   >
                     <div className="project-content_fp">
