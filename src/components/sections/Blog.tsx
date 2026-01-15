@@ -64,7 +64,7 @@ const Blog: React.FC = () => {
             <h2 className="section-header">Latest Insights</h2>
             <p className="section-subtitle">Thoughts on tech, research, and innovation</p>
           </div>
-          <Link href="/blog" className="view-all-btn">
+          <Link href="/blog" className="view-all-btn-b">
             View All Posts
             <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
           </Link>

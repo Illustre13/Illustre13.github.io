@@ -46,7 +46,7 @@ EMAIL_APP_PASSWORD=your-app-password
 
 # NextAuth
 NEXTAUTH_SECRET=your-nextauth-secret-here
-NEXTAUTH_URL=http://localhost:1998
+NEXTAUTH_URL=http://localhost:3005
 ```
 
 ### 2.2 Generate NextAuth Secret
@@ -153,7 +153,7 @@ You should see:
    npm run dev
    ```
 
-2. Go to: `http://localhost:1998/admin/login`
+2. Go to: `http://localhost:3005/admin/login`
 
 3. Login with:
    - **Email**: `ndahayosibertin17@gmail.com`

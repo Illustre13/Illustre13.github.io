@@ -44,7 +44,7 @@
   letter-spacing: 0.3px;
 }
 
-.view-all-btn {
+.view-all-btn-b {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -60,7 +60,7 @@
   letter-spacing: 0.3px;
 }
 
-.view-all-btn:hover {
+.view-all-btn-b:hover {
   background: #0288d1;
   transform: translateX(5px);
 }
@@ -446,7 +446,7 @@
     margin-bottom: 2.5rem;
   }
 
-  .view-all-btn {
+  .view-all-btn-b {
     width: 100%;
     justify-content: center;
   }

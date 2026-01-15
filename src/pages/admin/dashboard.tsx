@@ -43,6 +43,17 @@ interface Project {
   featured: boolean;
 }
 
+interface Skill {
+  id: string;
+  name: string;
+  category: string;
+  level: number;
+  icon?: string;
+  color?: string;
+  visible: boolean;
+  yearsOfExp?: number;
+}
+
 interface Message {
   id: string;
   firstName: string;
@@ -66,6 +77,7 @@ const AdminDashboard: React.FC = () => {
   });
   const [posts, setPosts] = useState<Post[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
+  const [skills, setSkills] = useState<Skill[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -95,6 +107,7 @@ const AdminDashboard: React.FC = () => {
 
       setPosts(postsData.slice(0, 5));
       setProjects(projectsData.slice(0, 5));
+      setSkills(skillsData);
       setMessages(messagesData.messages || messagesData.slice(0, 5));
 
       setStats({
@@ -131,6 +144,29 @@ const AdminDashboard: React.FC = () => {
       fetchDashboardData();
     } catch (error) {
       console.error('Error deleting project:', error);
+    }
+  };
+
+  const handleDeleteSkill = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this skill?')) return;
+    try {
+      await fetch(`/api/admin/skills/${id}`, { method: 'DELETE' });
+      fetchDashboardData();
+    } catch (error) {
+      console.error('Error deleting skill:', error);
+    }
+  };
+
+  const handleToggleSkillVisibility = async (id: string, visible: boolean) => {
+    try {
+      await fetch(`/api/admin/skills/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ visible: !visible }),
+      });
+      fetchDashboardData();
+    } catch (error) {
+      console.error('Error toggling skill visibility:', error);
     }
   };
 
@@ -403,7 +439,77 @@ const AdminDashboard: React.FC = () => {
                 <FontAwesomeIcon icon={faPlus} /> New Skill
               </Link>
             </div>
-            <p className="coming-soon">Skills management UI coming soon...</p>
+
+            <div className="skills-grid">
+              {skills.map((skill) => (
+                <div key={skill.id} className="skill-card">
+                  <div className="skill-header">
+                    <div className="skill-title">
+                      {skill.icon && (
+                        <div 
+                          className="skill-icon" 
+                          style={{ background: skill.color || '#03a9f4' }}
+                        >
+                          <FontAwesomeIcon icon={faCode} />
+                        </div>
+                      )}
+                      <div>
+                        <h3>{skill.name}</h3>
+                        <p className="skill-category">{skill.category}</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => handleToggleSkillVisibility(skill.id, skill.visible)}
+                      className={`visibility-toggle ${skill.visible ? 'visible' : 'hidden'}`}
+                    >
+                      <FontAwesomeIcon icon={skill.visible ? faEye : faEye} />
+                    </button>
+                  </div>
+
+                  <div className="skill-details">
+                    <div className="skill-level">
+                      <div className="level-label">
+                        <span>Proficiency</span>
+                        <strong>{skill.level}%</strong>
+                      </div>
+                      <div className="progress-bar">
+                        <div 
+                          className="progress-fill" 
+                          style={{ 
+                            width: `${skill.level}%`,
+                            background: skill.color || '#03a9f4'
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    {skill.yearsOfExp && (
+                      <p className="skill-experience">
+                        {skill.yearsOfExp} {skill.yearsOfExp === 1 ? 'year' : 'years'} of experience
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="skill-actions">
+                    <Link href={`/admin/skills/edit/${skill.id}`} className="btn-sm">
+                      <FontAwesomeIcon icon={faEdit} /> Edit
+                    </Link>
+                    <button
+                      onClick={() => handleDeleteSkill(skill.id)}
+                      className="btn-sm btn-danger"
+                    >
+                      <FontAwesomeIcon icon={faTrash} /> Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {skills.length === 0 && (
+              <div className="empty-state">
+                <p>No skills added yet. Add your first skill to get started!</p>
+              </div>
+            )}
           </div>
         )}
 
