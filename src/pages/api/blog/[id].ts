@@ -8,11 +8,13 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { id } = req.query;
+  const identifier = id as string;
 
   if (req.method === 'GET') {
     try {
-      const post = await prisma.post.findUnique({
-        where: { id: id as string },
+      // Try to find by slug first, then by ID
+      let post = await prisma.post.findUnique({
+        where: { slug: identifier },
         include: {
           author: {
             select: {
@@ -23,12 +25,36 @@ export default async function handler(
         },
       });
 
+      // If not found by slug, try by ID
+      if (!post) {
+        post = await prisma.post.findUnique({
+          where: { id: identifier },
+          include: {
+            author: {
+              select: {
+                name: true,
+                email: true,
+              },
+            },
+          },
+        });
+      }
+
       if (!post) {
         return res.status(404).json({ error: 'Post not found' });
       }
 
+      // Increment view count for public slug-based requests
+      if (post.slug === identifier) {
+        await prisma.post.update({
+          where: { id: post.id },
+          data: { views: { increment: 1 } },
+        });
+      }
+
       return res.status(200).json(post);
-    } catch {
+    } catch (error) {
+      console.error('Error fetching post:', error);
       return res.status(500).json({ error: 'Error fetching post' });
     }
   }

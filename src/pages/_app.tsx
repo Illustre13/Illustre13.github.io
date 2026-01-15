@@ -7,6 +7,7 @@ import "../styles/timeline.css";
 import '../styles/skills.css';
 import '../styles/portfolio.css';
 import '../styles/blog.css';
+import '../styles/blog-post.css';
 import '../styles/contact.css';
 import '../styles/footer.css';
 import '../styles/admin.css';
