@@ -104,7 +104,7 @@
 
             <div className="hero-actions">
               <div className="action-buttons">
-                <a href="/files/bertin_ndahayo_cv.pdf" className="btn-primary-fp" download>
+                <a href="/files/Bertin_Resume_26_3.pdf" className="btn-primary-fp" download>
                   <span>Download CV</span>
                   <FontAwesomeIcon icon={faArrowRight} />
                 </a>

@@ -25,6 +25,8 @@ const nextConfig = {
       '/admin/*': ['**/*'],
     },
   },
+  output: 'export',
+  basePath: 'Illustre13.github.io/my-brand-new',
 }
 
 export default nextConfig;
